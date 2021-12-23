@@ -1,0 +1,130 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/sample.css">
+    <title>脳トレ版</title>
+</head>
+
+<body>
+    <header>
+        <h1>脳トレじゃんけん</h1>
+    </header>
+
+    <main>
+        <!-- 説明画面 -->
+        <div class="bg">
+            <div id="page1">
+                <p>「グーorチョキorパー」に「勝つor負けるorあいこ」の手を指示に従って出してください<br>
+                    正解するとコンピューターの体力が10減ります。<br>
+                    間違えるとコンピューターの体力が10回復します</p>
+                <button id="start_btn">スタート</button>
+            </div>
+            <!-- ゲーム画面 -->
+            <div id="page2" class="displayNone">
+                <div>
+                    <dt>経過時間</dt>
+                    <dd id="timer"> 秒</dd>
+                </div>
+                <ul>
+                    <li id="gu_btn">グー</li>
+                    <li id="cho_btn">チョキ</li>
+                    <li id="par_btn">パー</li>
+                    <li id="guchopa_btn" class="displayNone hidden_btn">グチョパ</li>
+                </ul>
+                <div>
+                    <dt>相手の情報</dt>
+                    <dd id="com_information"> </dd>
+                </div>
+                <div>
+                    <dt>コンピューターの体力</dt>
+                    <dd id="com_life">100</dd>
+                </div>
+
+                <!-- <div class="content">
+                            <a class="js-modal-open" href="" data-target="modal01">クリックでモーダル1を表示</a><br>
+                            <a class="js-modal-open" href="" data-target="modal02">クリックでモーダル2を表示</a>
+                        </div>
+                        <div id="modal01" class="modal js-modal">
+                            <div class="modal__bg js-modal-close"></div>
+                            <div class="modal__content">
+                                <p>1つ目モーダルウィンドウです。ここにモーダルウィンドウで表示したいコンテンツを入れます。モーダルウィンドウを閉じる場合は下の「閉じる」をクリックするか、背景の黒い部分をクリックしても閉じることができます。
+                                </p>
+                                <a class="js-modal-close" href="">閉じる</a>
+                            </div>                
+                        </div>           
+                        <div id="modal02" class="modal js-modal">
+                            <div class="modal__bg js-modal-close"></div>
+                            <div class="modal__content">
+                                <p>2つ目モーダルウィンドウです。ここにモーダルウィンドウで表示したいコンテンツを入れます。モーダルウィンドウを閉じる場合は下の「閉じる」をクリックするか、背景の黒い部分をクリックしても閉じることができます。
+                                </p>
+                                <a class="js-modal-close" href="">閉じる</a>
+                            </div>
+                        </div>
+                        -->
+            </div>
+            <!-- 結果画面 -->
+            <div id="page3" class="displayNone">
+                <h1>結果</h1>
+                <h2 id="final_result"></h2>
+                <p>自信のある結果が出たら写真をとってslack挙げてください(10秒切れば相当すごいと思います)</p>
+            </div>
+        </div>
+    </main>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="js/engine/game.js"></script>
+    <script>
+        let lifeArray = [100, 100]
+        let hands = [0, 0]
+        let s
+        //最初のcomの出す手
+        let random = brain_com_pattern()
+
+        //タイマーの関数
+
+        $("#start_btn").on("click", function () {
+            s = 0
+            let timer1 = null
+            function timer() {
+                s++
+                $("#timer").text(s / 100 + "秒")
+            }
+            timer1 = setInterval(timer, 10)
+            $("#page1").addClass("displayNone")
+            $("#page2").removeClass("displayNone")
+        })
+
+        $("#gu_btn").on("click", function () {
+            com_guchopa(random)
+            let judgement = janken_rule(random, 0)
+            lifeArray = brain_life_point(judgement, lifeArray[0], lifeArray[1])
+            lifeArray = brain_final_judge(s, lifeArray[0], lifeArray[1])
+            random = brain_com_pattern()
+        })
+        $("#cho_btn").on("click", function () {
+            com_guchopa(random)
+            let judgement = janken_rule(random, 1)
+            lifeArray = brain_life_point(judgement, lifeArray[0], lifeArray[1])
+            lifeArray = brain_final_judge(s, lifeArray[0], lifeArray[1])
+            random = brain_com_pattern()
+        })
+        $("#par_btn").on("click", function () {
+            com_guchopa(random)
+            let judgement = janken_rule(random, 2)
+            lifeArray = brain_life_point(judgement, lifeArray[0], lifeArray[1])
+            lifeArray = brain_final_judge(s, lifeArray[0], lifeArray[1])
+            random = brain_com_pattern()
+        })
+        $("#guchopa_btn").on("click", function () {
+            com_guchopa(random)
+            let judgement = janken_rule(random, 3)
+            lifeArray = brain_life_point(judgement, lifeArray[0], lifeArray[1])
+            lifeArray = brain_final_judge(s, lifeArray[0], lifeArray[1])
+            random = brain_com_pattern()
+        })
+
+    </script>
+</body>
+
+</html>

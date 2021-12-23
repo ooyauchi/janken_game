@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/sample.css">
+    <title>ジャンケン</title>
+</head>
+
+<body>
+    <header>
+        <h1>じゃんけん</h1>
+    </header>
+
+    <main>
+        <div>
+            <dt>制限時間</dt>
+            <dd id="timer"> </dd>
+        </div>
+        <ul>
+            <li id="gu_btn">グー</li>
+            <li id="cho_btn">チョキ</li>
+            <li id="par_btn">パー</li>
+            <li id="guchopa_btn">グチョパ</li>
+        </ul>
+        <div>
+            <dt>相手の情報</dt>
+            <dd id="com_information"> </dd>
+        </div>
+        <div>
+            <dt>コンピュータの出した手は？</dt>
+            <dd id="com_hand"> </dd>
+        </div>
+        <div>
+            <dt>結果は？</dt>
+            <dd id="result"> </dd>
+        </div>
+        <div>
+            <dt>あなたの体力</dt>
+            <dd id="my_life"> </dd>
+        </div>
+        <div>
+            <dt>コンピューターの体力</dt>
+            <dd id="com_life"> </dd>
+        </div>
+    </main>
+
+    <footer>フッター</footer>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="js/engine/game.js"></script>
+</body>
+
+</html>

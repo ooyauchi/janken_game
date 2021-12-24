@@ -17,4 +17,4 @@
 - ジャンケンでどうやってよりゲーム性を高められるかを考えた所
 
 ## URL
-https://ooyauchi.github.io/cheese_academy/
+https://ooyauchi.github.io/janken_game/

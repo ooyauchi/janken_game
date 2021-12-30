@@ -3,6 +3,8 @@
 //あいこは0,勝ちは1,負けは-1
 //自分が0番目の箱comが1番目の箱
 
+
+
 /*----コナミコマンドの設定----------------------*/
 
 //コナミコマンド[↑, ↑, ↓, ↓, ←, →, ←, →, B, A]
@@ -132,11 +134,23 @@ function brain_life_point(judgement, mylife, comlife) {
     return [mylife, comlife]
 }
 //脳トレモードの最後の処理
+let result_array = []
 function brain_final_judge(second, mylife, comlife) {
     if (comlife <= 0) {
+        result_array
         const result_second = second / 100
-        $("footer").text(result_second + "秒")
+
+        let best_result = localStorage.getItem("best_result")
+        if (result_second < best_result) {
+            best_result = result_second
+            localStorage.setItem("best_result", best_result)
+        }
+
+
+
+
         $("#final_result").text(result_second + "秒")
+        $("#best_result").text(best_result + "秒")
 
         //画面の遷移
         $("#page2").addClass("displayNone")
